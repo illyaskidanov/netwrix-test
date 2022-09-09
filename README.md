@@ -16,8 +16,6 @@ REQUIREMENTS
 INSTALLATION
 ------------
 
-### Install via Composer
-
 You need to run project:
 
 ~~~
