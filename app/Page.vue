@@ -1,5 +1,6 @@
 <template>
   <div>
+    <page-header></page-header>
     <partner-search-form @search-form-changed="onSearchFormChanged"></partner-search-form>
     <partner-list :partners="partnerList"></partner-list>
   </div>
@@ -8,6 +9,7 @@
 import api from './api'
 import PartnerSearchForm from "./components/PartnerSearchForm";
 import PartnerList from "./components/PartnerList";
+import PageHeader from "./components/PageHeader";
 
 export default {
   data() {
@@ -18,6 +20,7 @@ export default {
   components: {
     PartnerSearchForm,
     PartnerList,
+    PageHeader,
   },
   methods: {
     async loadPartners(params = {}) {

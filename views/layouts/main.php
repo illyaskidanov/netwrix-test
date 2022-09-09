@@ -16,7 +16,7 @@ $this->beginPage() ?>
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <?php
     $this->registerCsrfMetaTags() ?>
-    <title>Vue Library App</title>
+    <title>Partner Locator</title>
     <?php
     $this->head() ?>
 </head>

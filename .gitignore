@@ -36,7 +36,7 @@ tests/_support/_generated
 /.vagrant
 
 /node_modules
-/images
+/web/images
 
 /web/app.js
 /web/mix-manifest.json
