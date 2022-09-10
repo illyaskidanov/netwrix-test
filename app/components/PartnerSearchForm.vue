@@ -17,13 +17,13 @@
             </b-row>
             <b-row>
               <b-col md="4">
-                <b-select class="partner-search-form__select" v-model="searchForm.status" :options="statusOptions"></b-select>
+                <custom-select placeholder="Type" name="status" v-model="searchForm.status" :options="statusOptions"></custom-select>
               </b-col>
               <b-col md="4">
-                <b-select class="partner-search-form__select" v-model="searchForm.country" :options="countryOptions"></b-select>
+                <custom-select placeholder="Country" name="country" v-model="searchForm.country" :options="countryOptions"></custom-select>
               </b-col>
               <b-col md="4">
-                <b-select class="partner-search-form__select" v-model="searchForm.state" :options="stateOptions" :disabled="!isSelectedCountryHasStates()"></b-select>
+                <custom-select placeholder="State" name="state" v-model="searchForm.state" :options="stateOptions"></custom-select>
               </b-col>
             </b-row>
           </b-container>
@@ -35,8 +35,12 @@
 
 <script>
 import api from '../api'
+import CustomSelect from "./CustomSelect";
 export default {
   name: "PartnerSearchForm",
+  components: {
+    CustomSelect
+  },
   data() {
     return {
       searchForm: {
@@ -46,7 +50,6 @@ export default {
         state: '',
       },
       statusOptions: [
-        {value: "", text: "Type", disabled: true},
         {value: 'Preferred Partner', text: 'Preferred Partner'},
         {value: 'MSP Partner', text: 'MSP Partner'},
         {value: 'Premium Partner', text: 'Premium Partner'},
@@ -74,15 +77,14 @@ export default {
   },
   computed: {
     countryOptions() {
-      return [{value: "", text: "Country", disabled: true}].concat(this.countries.map(c => ({value: c.short_name, text: c.name})));
+      return this.countries.map(c => ({value: c.short_name, text: c.name}));
 
     },
     stateOptions() {
-      let states = [{value: "", text: "State", disabled: true}];
       if (this.isSelectedCountryHasStates()) {
-        states = states.concat(this.selectedCountry.states.map(s => ({value: s.short_name, text: s.name})));
+        return this.selectedCountry.states.map(s => ({value: s.short_name, text: s.name}));
       }
-      return states;
+      return [];
     },
     selectedCountry() {
       return this.countries.find(c => c.short_name === this.searchForm.country);
