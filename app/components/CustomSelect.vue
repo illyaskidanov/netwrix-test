@@ -1,7 +1,7 @@
 <template>
   <div class="custom-select" :data-name="name">
     <input class="custom-select__input" :name="name" @focus="onFocus" @blur="onBlur" readonly
-           :placeholder="placeholder" :value="text">
+           :placeholder="placeholder" :value="text" :disabled="disabled">
     <div class="custom-select__dropdown" :data-name="name">
       <div class="custom-select__option" @mousedown="onMousedown(o.value, o.text)" v-for="o in options" :data-value="o.value">
         {{ o.text }}
@@ -28,11 +28,14 @@ export default {
     placeholder: String,
     options: Array,
     name: String,
+    disabled: {type: Boolean, default: false}
   },
   methods: {
     onFocus() {
-      this.dropdown.setAttribute('data-show', '')
-      this.popper.update();
+      if (!this.disabled) {
+        this.dropdown.setAttribute('data-show', '')
+        this.popper.update();
+      }
     },
     onBlur() {
       this.dropdown.removeAttribute('data-show');
@@ -84,6 +87,19 @@ export default {
   background-color: transparent;
   outline: none;
   border: 2px solid #FFFFFF;
+}
+
+.custom-select__input:disabled {
+  border: 2px solid #829db9;
+  color: #829db9;
+}
+
+.custom-select__input:disabled::placeholder {
+  color: #829db9;
+}
+
+.custom-select__input:disabled:hover {
+  cursor: not-allowed;
 }
 
 .custom-select__input::placeholder {

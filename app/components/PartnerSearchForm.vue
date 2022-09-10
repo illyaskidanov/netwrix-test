@@ -23,7 +23,7 @@
                 <custom-select placeholder="Country" name="country" v-model="searchForm.country" :options="countryOptions"></custom-select>
               </b-col>
               <b-col md="4">
-                <custom-select placeholder="State" name="state" v-model="searchForm.state" :options="stateOptions"></custom-select>
+                <custom-select placeholder="State" name="state" v-model="searchForm.state" :options="stateOptions" :disabled="!isSelectedCountryHasStates()"></custom-select>
               </b-col>
             </b-row>
           </b-container>
@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     isSelectedCountryHasStates() {
-      return this.selectedCountry && this.selectedCountry.states.length !== 0;
+      return Boolean(this.selectedCountry && this.selectedCountry.states.length !== 0);
     }
   },
   computed: {
@@ -132,17 +132,5 @@ export default {
     font-size: 16px;
     line-height: 32px;
     color: #FFFFFF;
-  }
-
-  .partner-search-form__select {
-    line-height: 1.5;
-    padding: 6px 16px;
-
-    outline: none;
-    width: 100%;
-    background: transparent;
-    color: #FFFFFF;
-    border-radius: 3px;
-    border: 2px solid #FFFFFF;
   }
 </style>
