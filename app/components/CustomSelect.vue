@@ -24,6 +24,15 @@ export default {
       dropdown: null,
     }
   },
+  watch: {
+    // used to clear value on options change
+    options: {
+      handler() {
+        this.value = '';
+        this.text = '';
+      }
+    }
+  },
   props: {
     placeholder: String,
     options: Array,
@@ -91,7 +100,6 @@ export default {
 
 .custom-select__input:disabled {
   border: 2px solid #829db9;
-  color: #829db9;
 }
 
 .custom-select__input:disabled::placeholder {
